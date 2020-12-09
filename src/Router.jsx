@@ -4,6 +4,8 @@ import Layout from "./Layout";
 import homePage from "./pages/homePage.jsx";
 import login from "./pages/login.jsx";
 import userProfile from "./pages/userProfile.jsx";
+import meditation from "./pages/meditation.jsx";
+
 
 export const Routes = () => {
   return (
@@ -13,6 +15,7 @@ export const Routes = () => {
           <Route path="/" exact component={homePage} />
           <Route path="/login" exact component={login} />
           <Route path="/profile" exact component={userProfile} />
+          <Route path="/meditation" exact component ={meditation} />
         </div>
       </Layout>
     </Router>

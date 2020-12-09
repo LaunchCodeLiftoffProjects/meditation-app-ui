@@ -36,3 +36,34 @@
     transform: rotate(360deg);
   }
 }
+
+/* Meditation Style*/
+.number {
+  font-size: 5em;
+  margin: 15px;
+  border: 1px solid #ccc;
+}
+
+.minutes {
+  font-size: 4em;
+}
+
+.btn-start-pause {
+  margin-top: 30px;
+}
+.btn-start {
+  font-size: 3em;
+  margin-right: 30px;
+  padding: 15px;
+}
+.btn-pause {
+  font-size: 3em;
+  padding: 15px;
+}
+.btn {
+  margin-top: 30px;
+}
+.btn-cancle {
+  font-size: 3em;
+  padding: 15px;
+}
