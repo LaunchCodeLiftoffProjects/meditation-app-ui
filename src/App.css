@@ -38,32 +38,66 @@
 }
 
 /* Meditation Style*/
-.number {
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  margin: 0;
   font-size: 5em;
-  margin: 15px;
-  border: 1px solid #ccc;
 }
 
-.minutes {
-  font-size: 4em;
+.container {
+  margin: 0 auto;
+  text-align: center;
+}
+.message {
+  padding-bottom: 1.5em;
 }
 
-.btn-start-pause {
-  margin-top: 30px;
+.timeContainer {
+  margin: 60px 0;
 }
-.btn-start {
-  font-size: 3em;
-  margin-right: 30px;
-  padding: 15px;
+
+.displayTime {
+  border: 2px solid #ccc;
+  font-size: 2em;
+  padding: 50px 30px;
 }
-.btn-pause {
-  font-size: 3em;
-  padding: 15px;
+
+button,
+input[type="submit"] {
+  width: 25%;
+  padding: 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #61dafb;
+  font-size: 1.3em;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s, background-color 0.3s;
 }
-.btn {
-  margin-top: 30px;
+
+button:hover {
+  border: 2px solid #ccc;
 }
-.btn-cancle {
-  font-size: 3em;
-  padding: 15px;
+
+input[type="submit"] {
+  background-color: #61dafb;
+}
+
+input[type="submit"]:hover {
+  background-color: #ffffff;
+  color: #ccc;
+  border: 2px solid #61dafb;
+}
+
+input[type="text"] {
+  margin-bottom: 30px;
+  padding: 20px;
+  font-size: 1em;
+  width: 45%;
+  border: 2px solid #ccc;
 }
