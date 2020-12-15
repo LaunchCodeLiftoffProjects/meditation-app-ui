@@ -8,19 +8,25 @@ export const NavBar = ({ color, size }) => (
     <Toolbar>
     <Link to="/">
       <Typography variant="h4">
-        <Button>Home</Button>
+        <Button>Sunrise Meditation</Button>
         </Typography>
       </Link>
+      <Link to="/meditation">
+        <Button className="navButton">Meditation</Button>
+      </Link>
+      <Link to="/learnAbout">
+        <Button className="navButton">Learn About Meditation</Button>
+      </Link>
       <Link to="/profile">
-        <Button className="navButton">My Profile</Button>
+        <Button className="navButton">User Profile</Button>
       </Link>
       <Link to="/Login">
         <Button>Login</Button>
       </Link>
-      <Link to="/meditation">
-        <Button>Meditation</Button>
+      <Link to="/register">
+        <Button>Registration</Button>
       </Link>
-      
+
     </Toolbar>
   </AppBar>
 );
