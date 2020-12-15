@@ -6,10 +6,11 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import axios from "axios";
 
-const useStyles = makeStyles((theme) => ({
+const classes = theme => ({
     paper: {
       marginTop: theme.spacing(8),
       display: 'flex',
@@ -27,13 +28,60 @@ const useStyles = makeStyles((theme) => ({
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
-  }));
+  });
 
-// export default class Registration extends React.Component {
-export default function Registration() {
+export default class Registration extends React.Component {
+// export default function Registration() {
 
-    const classes = useStyles();
-    //render() {
+  constructor(props){
+    super(props);
+    this.state = this.initialState;
+    this.state.show=false
+    this.userChange=this.userChange.bind(this);
+    this.submitUser=this.submitUser.bind(this);
+  }
+  
+    initialState = {
+      userName:"",emailId:"",password:"",confirmPassword:"",weeklyGoal:""
+    }
+
+    resetUser=() => {
+      this.setState(() => this.initialState)
+    }
+
+    submitUser= event =>{
+      event.preventDefault();
+      const user = {
+            userName:  this.state.userName,
+            emailId: this.state.emailId,
+            password: this.state.password,
+            weeklyGoal: this.state.weeklyGoal
+      };      
+      axios.post("http://localhost:8080/register",user)
+      .then(response => {
+      if(response.data!=null){
+      this.setState({"show":true});
+      setTimeout(() => this.setState({"show":false}),3000);
+      }
+      else{
+      this.setState({"show":false});
+      }});
+      this.setState(this.initialState);
+    }
+
+    userChange =event =>{
+      this.setState({
+        [event.target.name]:event.target.value
+      })
+    };
+
+    userList=()=>{
+      return this.props.history.push("/list");
+      }
+
+    render() {
+      //classes = withStyles();
+      const {userName,emailId,password,weeklyGoal}=this.state;
         return (
             <Container component="main" maxWidth="xs">
               <CssBaseline />
@@ -44,7 +92,7 @@ export default function Registration() {
                 <Typography component="h1" variant="h5">
                   New User Registration
                 </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} noValidate onReset={this.resetUser} onSubmit={this.submitUser} id="userFormId">
                   <Grid container spacing={2}>
                     <Grid item xs={12}>
                       <TextField
@@ -54,8 +102,10 @@ export default function Registration() {
                         required
                         fullWidth
                         id="userName"
-                        label="User Name"
+                        label="User Name"                    
                         autoFocus
+                        onChange={this.userChange}
+                        value={userName}
                       />
                     </Grid>            
                     <Grid item xs={12}>
@@ -63,10 +113,14 @@ export default function Registration() {
                         variant="outlined"
                         required
                         fullWidth
-                        id="email"
+                        id="emailId"
                         label="Email Address"
-                        name="email"
-                        autoComplete="email"
+                        name="emailId"
+                        autoComplete="emailId"
+                        onChange={this.userChange} 
+                        value={emailId}   
+                        validators={['required', 'isEmail']}
+                        errorMessages={['this field is required', 'email is not valid']}               
                       />
                     </Grid>
                     <Grid item xs={12}>
@@ -79,6 +133,8 @@ export default function Registration() {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        onChange={this.userChange}
+                        value={password}
                       />
                     </Grid>
                     <Grid item xs={12}>
@@ -88,9 +144,11 @@ export default function Registration() {
                         fullWidth
                         name="confirmPassword"
                         label="Confirm Password"
-                        type="confirmPassword"
+                        type="password"
                         id="confirmPassword"
                         autoComplete="current-password"
+                        onChange={this.userChange}
+                        value={password}
                       />
                     </Grid>
                     <Grid item xs={12}>
@@ -98,11 +156,12 @@ export default function Registration() {
                         variant="outlined"
                         required
                         fullWidth
-                        name="confirmPassword"
-                        label="Goals (Weekly) in minutes"
-                        type="confirmPassword"
-                        id="confirmPassword"
-                        autoComplete="current-password"
+                        name="weeklyGoal"
+                        label="Goals (Weekly) in minutes"                
+                        id="weeklyGoal"
+                        autoComplete="weeklyGoal"
+                        onChange={this.userChange}
+                        value={weeklyGoal}                        
                       />
                     </Grid>
                   </Grid>
@@ -119,5 +178,5 @@ export default function Registration() {
               </div>
             </Container>
           );
-    //}
+    }
 }
