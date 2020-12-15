@@ -36,3 +36,68 @@
     transform: rotate(360deg);
   }
 }
+
+/* Meditation Style*/
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  margin: 0;
+  font-size: 5em;
+}
+
+.container {
+  margin: 0 auto;
+  text-align: center;
+}
+.message {
+  padding-bottom: 1.5em;
+}
+
+.timeContainer {
+  margin: 60px 0;
+}
+
+.displayTime {
+  border: 2px solid #ccc;
+  font-size: 2em;
+  padding: 50px 30px;
+}
+
+button,
+input[type="submit"] {
+  width: 25%;
+  padding: 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #61dafb;
+  font-size: 1.3em;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+button:hover {
+  border: 2px solid #ccc;
+}
+
+input[type="submit"] {
+  background-color: #61dafb;
+}
+
+input[type="submit"]:hover {
+  background-color: #ffffff;
+  color: #ccc;
+  border: 2px solid #61dafb;
+}
+
+input[type="text"] {
+  margin-bottom: 30px;
+  padding: 20px;
+  font-size: 1em;
+  width: 45%;
+  border: 2px solid #ccc;
+}
