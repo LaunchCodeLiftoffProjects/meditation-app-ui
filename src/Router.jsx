@@ -18,7 +18,7 @@ export const Routes = () => {
           <Route path="/learnAbout" exact component={learnAboutMeditation} />
           <Route path="/profile" exact component={userProfile} />
           <Route path="/login" exact component={login} />          
-          <Route path="/Registration" exact component={Registration} />
+          <Route path="/register" exact component={Registration} />
         </div>
       </Layout>
     </Router>
