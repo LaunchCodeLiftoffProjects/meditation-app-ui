@@ -23,7 +23,7 @@ export const NavBar = ({ color, size }) => (
       <Link to="/Login">
         <Button>Login</Button>
       </Link>
-      <Link to="/Registration">
+      <Link to="/register">
         <Button>Registration</Button>
       </Link>
 
