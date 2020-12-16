@@ -93,8 +93,7 @@ input[type="submit"]:hover {
   color: #ccc;
   border: 2px solid #61dafb;
 }
-
-input[type="text"] {
+.enterMinutes {
   margin-bottom: 30px;
   padding: 20px;
   font-size: 1em;
