@@ -15,8 +15,8 @@ export default class Clock extends React.Component {
   render () {
     const {time} = this.props;
     return (
-      <div className="timeContainer">
-        <h1 className = "minutes"><span className ="displayTime">{this.format(time)}</span> minutes </h1>
+      <div className="meditation-timeContainer">
+        <h1 className = "meditation-minutes"><span className ="meditation-displayTime">{this.format(time)}</span> minutes </h1>
       </div>
     )
   }

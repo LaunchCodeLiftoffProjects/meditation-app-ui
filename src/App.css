@@ -43,19 +43,19 @@
   box-sizing: border-box;
 }
 
-.container {
+.meditation-container {
   margin: 0 auto;
   text-align: center;
 }
-.message {
+.meditation-message {
   padding-bottom: 1.5em;
 }
 
-.timeContainer {
+.meditation-timeContainer {
   margin: 60px 0;
 }
 
-.displayTime {
+.meditation-displayTime {
   border: 2px solid #ccc;
   font-size: 2em;
   padding: 50px 30px;
@@ -79,7 +79,7 @@
   border: 2px solid #61dafb;
 }
 
-.enterMinutes {
+.meditation-enterMinutes {
   margin-bottom: 30px;
   padding: 20px;
   font-size: 1em;

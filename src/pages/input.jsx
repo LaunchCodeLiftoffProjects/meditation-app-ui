@@ -17,7 +17,7 @@ export default class Input extends React.Component {
   
     return (
       <form ref="form" onSubmit={this.onSubmit.bind(this)}>
-        <input className = "enterMinutes" type="text"  ref = {input => this.inputStr = input} placeholder="Enter your session in minutes"/>
+        <input className = "meditation-enterMinutes" type="text"  ref = {input => this.inputStr = input} placeholder="Enter your session in minutes"/>
         <input className = "meditation-btn"  type="submit" value="Start"></input>
       </form>
     )

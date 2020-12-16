@@ -62,10 +62,10 @@ export default class Meditaion extends React.Component {
     }
     const {count} = this.state;
     return (
-      <div className="container" style = {style}>
-        <h2 className = "message">Display Welcome Message!</h2>
+      <div className="meditation-container" style = {style}>
+        <h2 className = "meditation-message">Display Welcome Message!</h2>
         <Clock time={count}/>
-        <div className = "btn-wrapper">
+        <div>
         <Input onSetCountdown={this.handleCountdown.bind(this)}/>
         <Button label="stop" onClickHandler={this.handleStop.bind(this)}/>
         <Button label="reset" onClickHandler={this.handleReset.bind(this)}/>
