@@ -54,9 +54,15 @@ export default class Meditaion extends React.Component {
   }
   
   render() {
+    const style = {
+      
+        margin: 0,
+        fontSize: '2em'
+      
+    }
     const {count} = this.state;
     return (
-      <div className="container">
+      <div className="container" style = {style}>
         <h2 className = "message">Display Welcome Message!</h2>
         <Clock time={count}/>
         <div className = "btn-wrapper">
