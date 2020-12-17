@@ -17,6 +17,9 @@ export const NavBar = ({ color, size }) => (
       <Link to="/learnAbout">
         <Button className="navButton">Learn About Meditation</Button>
       </Link>
+      <Link to="/benefits">
+        <Button className="navButton">Benefits</Button>
+      </Link>
       <Link to="/profile">
         <Button className="navButton">User Profile</Button>
       </Link>
