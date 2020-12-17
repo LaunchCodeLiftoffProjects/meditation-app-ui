@@ -14,10 +14,11 @@ export default class Input extends React.Component {
   }
   
   render() {
+  
     return (
       <form ref="form" onSubmit={this.onSubmit.bind(this)}>
-        <input type="text"  ref = {input => this.inputStr = input} placeholder="Enter your session in minutes"/>
-        <input type="submit" value="Start"></input>
+        <input className = "meditation-enterMinutes" type="text"  ref = {input => this.inputStr = input} placeholder="Enter your session in minutes"/>
+        <input className = "meditation-btn"  type="submit" value="Start"></input>
       </form>
     )
   }
