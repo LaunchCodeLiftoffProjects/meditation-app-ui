@@ -16,6 +16,7 @@ export const Routes = () => {
           <Route path="/" exact component={homePage} />
           <Route path="/meditation" exact component={meditation} />
           <Route path="/learnAbout" exact component={learnAboutMeditation} />
+          <Route path="/benefits" exact component={benefits} />
           <Route path="/profile" exact component={userProfile} />
           <Route path="/login" exact component={login} />          
           <Route path="/register" exact component={Registration} />
