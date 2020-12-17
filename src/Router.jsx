@@ -4,6 +4,7 @@ import Layout from "./Layout";
 import homePage from "./pages/homePage.jsx";
 import meditation from "./pages/meditation.jsx";
 import learnAboutMeditation from "./pages/learnAbout.jsx";
+import benefits from "./pages/benefits.jsx";
 import login from "./pages/login.jsx";
 import userProfile from "./pages/userProfile.jsx";
 import Registration from "./pages/registration.jsx";

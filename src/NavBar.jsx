@@ -18,7 +18,7 @@ export const NavBar = ({ color, size }) => (
         <Button className="navButton">Learn About Meditation</Button>
       </Link>
       <Link to="/benefits">
-        <Button className="navButton">Benrfits</Button>
+        <Button className="navButton">Benefits</Button>
       </Link>
       <Link to="/profile">
         <Button className="navButton">User Profile</Button>
