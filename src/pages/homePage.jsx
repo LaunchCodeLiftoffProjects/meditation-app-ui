@@ -7,7 +7,7 @@ export default class HomePage extends React.Component {
             <div>
                 <h1> Welcome to the Sunrise Meditation App </h1>
                     <p> 
-                        Meditation works wonder in calming the mind, creating relaxation, promoting better sleep, and encouraging a healthy lifestyle.
+                        Meditation works wonders by calming the mind, creating relaxation, promoting better sleep, and encouraging a healthy lifestyle.
                         <br></br>
                         Mediating at the apropriate time is key.
                     </p>
