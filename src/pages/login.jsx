@@ -85,8 +85,8 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
+              <Link href="/forgotPassword" variant="body2">
+                {"Did you forget your password?"}
               </Link>
             </Grid>
             <Grid item>
