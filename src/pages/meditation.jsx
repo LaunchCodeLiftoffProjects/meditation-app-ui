@@ -12,90 +12,96 @@ export default class Meditaion extends React.Component {
     this.state = {
       count: 0,
       running: false,
-      meditation: {
-        action: null,
-        time_log: null,
-        created_timestamp: null,
-        end_timestamp:null,
-      }
+      startCount:0,
+      endCount:0,
+      time_log: 0,
+      created_timestamp: null,
+      end_timestamp:null,
       
-
     }
+
+    
   }
 
- 
-  componentDidMount(){
-
-    let meditation = {
-      action: this.state.meditation.action, 
-      created_timestamp: this.state.meditation. created_timestamp,
-      time_log: this.state.meditation.time_log, 
-      end_timestamp: this.state.meditation.end_timestamp
-    }
-    MeditationServices.saveMeditation(meditation);
-  }
-
+  
   componentDidUpdate(prevProps, prevState) {
     if(this.state.running !== prevState.running){
       switch(this.state.running) {
         case true:
-          this.handleStart();
+          this.handleStart();    
       }
     }
+
+    
   }
+
+  createDateStamp(){
+   
+    const date = new Date();
+    const mySqldateformat = date.toISOString().split('T')[0] + ' '  
+    + date.toTimeString().split(' ')[0];
+    return mySqldateformat;
+  }
+
+
  
   handleStart() {
+    
+    const mySqldateformat = this.createDateStamp();
    
     const startTimeLog = this.state.count;
-    const date = new Date();
-    const mySqldateformat = date.toISOString().split('T')[0] + ' '  
-    + date.toTimeString().split(' ')[0];
 
     this.timer = setInterval(() => {
-      
+
       const newCount = this.state.count - 1;
-      const timeintoMinutes = (startTimeLog - newCount)/60;
-
+    
       this.setState(
-        {count: newCount >0 ? newCount : 0,
-          meditation: {
-            action: "start",
-            time_log: timeintoMinutes,
-            created_timestamp: mySqldateformat,
-            end_timestamp:null,
-          }
-
+        {count: newCount >=0 ? newCount : 0,
+        startCount:startTimeLog,
+        endCount:(this.state.count-1),
+        time_log: Math.ceil((this.state.startCount - this.state.endCount)/60),
+        created_timestamp: mySqldateformat,
+        
         }
       );
+  
       newCount ===0 && this.handleStop();
+      
     }, 1000);
+    //console.log("state from starthandler: " , this.state);
+    
 
-    this.componentDidMount();
-   
   
   }
   
+
+ 
+
   handleStop() {
-    const endTimeLog = this.state.count;
-    const date = new Date();
-    const mySqldateformat = date.toISOString().split('T')[0] + ' '  
-    + date.toTimeString().split(' ')[0];
-
-
+    
+    const mySqldateformat = this.createDateStamp();
+  
     if(this.timer) {
       clearInterval(this.timer);
-      this.setState(
+     this.setState(
         {running:false,
-         meditation:{
-          action:"stop",
-          time_log: endTimeLog,
-          end_timestamp:mySqldateformat,
-         }
+        end_timestamp: mySqldateformat,
         }
-      );
+        
+      ); 
+  
     }
+    //console.log("from stop handler: " ,this.state);
 
-    this.componentDidMount();
+    let meditation = {
+      created_timestamp: this.state.created_timestamp,
+      time_log: this.state.time_log, 
+      end_timestamp: mySqldateformat
+    }
+    //console.log('MEDIATATION PAYLOAD', meditation);
+    MeditationServices.saveMeditation(meditation);
+
+
   }
   
  
