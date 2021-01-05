@@ -8,7 +8,7 @@ import benefits from "./pages/benefits.jsx";
 import login from "./pages/login.jsx";
 import userProfile from "./pages/userProfile.jsx";
 import Registration from "./pages/registration.jsx";
-import LoginSuccess from "./pages/LoginSuccess";
+import LoginSuccess from "./pages/LoginSuccess.jsx";
 import forgotPassword from "./pages/forgotPassword.jsx";
 export const Routes = () => {
   return (
