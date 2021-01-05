@@ -1,182 +1,170 @@
 import React from 'react';
+import { Grid, } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from "axios";
+import { useForm, Form } from '../components/useForm';
+import Controls from "../components/controls/Control";
 
-const classes = theme => ({
-    paper: {
-      marginTop: theme.spacing(8),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-    },
-    avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-      width: '100%', // Fix IE 11 issue.
-      marginTop: theme.spacing(3),
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-    },
-  });
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  }, 
+}));
 
-export default class Registration extends React.Component {
-// export default function Registration() {
+const initialFValues = {
+  userName: "",
+  emailId: "",
+  password: "", 
+  confirmPassword: "", 
+  weeklyGoal: "",
+}
 
-  constructor(props){
-    super(props);
-    this.state = this.initialState;
-    this.state.show=false
-    this.userChange=this.userChange.bind(this);
-    this.submitUser=this.submitUser.bind(this);
+export default function SignUp() {
+  const classes = useStyles();
+  const [responseData, setResponseData] = React.useState([]);
+
+  const validate = (fieldValues = values) => {
+    let temp = { ...errors }
+
+    if ('userName' in fieldValues) {
+      if(temp.userName = fieldValues.userName) {
+          temp.userName = "";
+        } else {
+          temp.userName = "This field is required.";          
+        }
+    }
+    if ('emailId' in fieldValues) {
+      if(temp.emailId = (/$^|.+@.+..+/).test(fieldValues.emailId)) {
+        temp.emailId = "";
+      } else {
+        temp.emailId = "Email is not valid.";
+      }
+    }
+    if ('password' in fieldValues) {
+      if(temp.password = fieldValues.password) {
+        temp.password = "";
+      } else {
+        temp.password = "This field is required.";
+      }
+    }
+    if ('confirmPassword' in fieldValues) {
+      if(temp.confirmPassword = fieldValues.confirmPassword) {
+        temp.confirmPassword = "";
+      } else {
+        temp.confirmPassword = "This field is required.";
+      }
+    }
+    if('weeklyGoal' in fieldValues) {
+      if(temp.weeklyGoal = fieldValues.weeklyGoal) {
+        temp.weeklyGoal = "";
+      } else {
+        temp.weeklyGoal = "This field is required.";
+      }
+    }
+    setErrors({
+        ...temp
+    })
+
+    if (fieldValues == values)
+        return Object.values(temp).every(x => x == "")
   }
-  
-    initialState = {
-      userName:"",emailId:"",password:"",confirmPassword:"",weeklyGoal:""
-    }
 
-    resetUser=() => {
-      this.setState(() => this.initialState)
-    }
+  const {
+      values,
+      setValues,
+      errors,
+      setErrors,
+      handleInputChange,
+      resetForm
+  } = useForm(initialFValues, true, validate);  
 
-    submitUser= event =>{
-      event.preventDefault();
-      const user = {
-            userName:  this.state.userName,
-            emailId: this.state.emailId,
-            password: this.state.password,
-            weeklyGoal: this.state.weeklyGoal
-      };      
-      axios.post("http://localhost:8080/register",user)
-      .then(response => {
-      if(response.data!=null){
-      this.setState({"show":true});
-      setTimeout(() => this.setState({"show":false}),3000);
-      }
-      else{
-      this.setState({"show":false});
-      }});
-      this.setState(this.initialState);
-    }
+  const handleSubmit = event => {
+    event.preventDefault();
+    const user = values;
 
-    userChange =event =>{
-      this.setState({
-        [event.target.name]:event.target.value
-      })
-    };
+    console.log("user : ", user);
+    
+      axios.post("http://localhost:8080/register", user)
+      .then(res => {
+        setResponseData(res.data);
+        console.log("res.data : " , res.data);
+       }
+      )
+      resetForm()
+  }
 
-    userList=()=>{
-      return this.props.history.push("/list");
-      }
-
-    render() {
-      //classes = withStyles();
-      const {userName,emailId,password,weeklyGoal}=this.state;
-        return (
-            <Container component="main" maxWidth="xs">
-              <CssBaseline />
-              <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                  <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                  New User Registration
-                </Typography>
-                <form className={classes.form} noValidate onReset={this.resetUser} onSubmit={this.submitUser} id="userFormId">
-                  <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                      <TextField
-                        autoComplete="userName"
-                        name="userName"
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="userName"
-                        label="User Name"                    
-                        autoFocus
-                        onChange={this.userChange}
-                        value={userName}
-                      />
-                    </Grid>            
-                    <Grid item xs={12}>
-                      <TextField
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="emailId"
-                        label="Email Address"
-                        name="emailId"
-                        autoComplete="emailId"
-                        onChange={this.userChange} 
-                        value={emailId}   
-                        validators={['required', 'isEmail']}
-                        errorMessages={['this field is required', 'email is not valid']}               
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        onChange={this.userChange}
-                        value={password}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="confirmPassword"
-                        label="Confirm Password"
-                        type="password"
-                        id="confirmPassword"
-                        autoComplete="current-password"
-                        onChange={this.userChange}
-                        value={password}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="weeklyGoal"
-                        label="Goals (Weekly) in minutes"                
-                        id="weeklyGoal"
-                        autoComplete="weeklyGoal"
-                        onChange={this.userChange}
-                        value={weeklyGoal}                        
-                      />
-                    </Grid>
-                  </Grid>
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                  >
-                    Sign Up
-                  </Button>
-                </form>
-              </div>
-            </Container>
-          );
-    }
+  return (
+    <Container component="main" maxWidth="xs">   
+      <CssBaseline />
+      <div className={classes.paper}>
+        <div>{responseData}</div>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Registration
+        </Typography>
+        <Form onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={12}>
+              <Controls.Input
+                name="userName"              
+                label="User Name"              
+                onChange={handleInputChange}                
+                value={values.userName}
+                error={errors.userName}
+              />
+              <Controls.Input
+                name="emailId"              
+                label="Email Id"              
+                onChange={handleInputChange}
+                value={values.emailId}
+                error={errors.emailId}
+              />
+              <Controls.Input
+                name="password"              
+                label="Password"              
+                onChange={handleInputChange}        
+                value={values.password}
+                error={errors.password}
+              />
+              <Controls.Input
+                name="confirmPassword"              
+                label="confirmPassword"              
+                onChange={handleInputChange}        
+                value={values.confirmPassword}
+                error={errors.confirmPassword}
+              />
+              <Controls.Input
+                name="weeklyGoal"              
+                label="Weekly Goal (in minutes)"
+                onChange={handleInputChange} 
+                value={values.weeklyGoal}
+                error={errors.weeklyGoal}
+              />
+              <Controls.Button
+                type="submit"
+                text="Sign Up" />
+              <Controls.Button
+                text="Reset"
+                color="default"
+                onClick={resetForm} />
+            </Grid>
+          </Grid>
+        </Form>
+      </div>     
+    </Container>
+  );
 }

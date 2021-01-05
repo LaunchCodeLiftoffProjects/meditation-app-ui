@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-export default function login_success_ux() {
+export default function LoginSuccess() {
     const classes = useStyles();
     return (
         <Container>
@@ -35,7 +35,7 @@ export default function login_success_ux() {
                 Graph/Use data goes here
             </div>
             <div className={classes.meditateButton}>
-                <Link to="/meditation">
+                <Link href="/meditation">
                     <Button
                     type="submit"
                     fullWidth
