@@ -58,17 +58,19 @@ export default class Meditaion extends React.Component {
       this.setState(
         {count: newCount >=0 ? newCount : 0,
         startCount:startTimeLog,
-        endCount:(this.state.count-1),
-        time_log: Math.ceil((this.state.startCount - this.state.endCount)/60),
+        endCount:this.state.count-1,
+        time_log: this.state.startCount - this.state.endCount,
         created_timestamp: mySqldateformat,
-        
         }
       );
+      
+      //console.log("state from starthandler: " , this.state.time_log);
+
   
       newCount ===0 && this.handleStop();
       
     }, 1000);
-    //console.log("state from starthandler: " , this.state);
+   // console.log("state from starthandler: " , this.state);
     
 
   
@@ -85,17 +87,18 @@ export default class Meditaion extends React.Component {
       clearInterval(this.timer);
      this.setState(
         {running:false,
-        end_timestamp: mySqldateformat,
         }
         
       ); 
   
     }
-    //console.log("from stop handler: " ,this.state);
+    // console.log(this.state.startCount, this.state.endCount);
+    // console.log("from stop handler: " ,this.state);
+    let timeLogIntoMinutes=((this.state.time_log + 1)/60).toFixed(2);
 
     let meditation = {
       created_timestamp: this.state.created_timestamp,
-      time_log: this.state.time_log, 
+      time_log:timeLogIntoMinutes,
       end_timestamp: mySqldateformat
     }
     //console.log('MEDIATATION PAYLOAD', meditation);
