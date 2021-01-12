@@ -1,5 +1,6 @@
 import React from "react";
 import MeditationServices from "../services/MeditationServices";
+import AuthenticationService from "../services/AuthenticationService.js";
 import Button from "./button";
 import Clock from "./clock";
 import Input from "./input";
@@ -17,6 +18,8 @@ export default class Meditaion extends React.Component {
       time_log: 0,
       created_timestamp: null,
       end_timestamp:null,
+      userId: null, 
+      total_time:null
       
     }
 
@@ -43,9 +46,11 @@ export default class Meditaion extends React.Component {
     return mySqldateformat;
   }
 
-
+// logic for update total time pull the  total time according to the userid, pass the value in total time state,
+// do the calculate in the stop state. totalmie from start state + timelog in stop state. 
  
   handleStart() {
+    const userId = AuthenticationService.getLoggedInUserId() ;
     
     const mySqldateformat = this.createDateStamp();
    
@@ -61,6 +66,7 @@ export default class Meditaion extends React.Component {
         endCount:this.state.count-1,
         time_log: this.state.startCount - this.state.endCount,
         created_timestamp: mySqldateformat,
+        userId: userId
         }
       );
       
@@ -80,7 +86,8 @@ export default class Meditaion extends React.Component {
  
 
   handleStop() {
-    
+
+  
     const mySqldateformat = this.createDateStamp();
   
     if(this.timer) {
@@ -96,12 +103,16 @@ export default class Meditaion extends React.Component {
     // console.log("from stop handler: " ,this.state);
     let timeLogIntoMinutes=((this.state.time_log + 1)/60).toFixed(2);
 
+    // 
+
+
     let meditation = {
+      userId: this.state.userId,
       created_timestamp: this.state.created_timestamp,
       time_log:timeLogIntoMinutes,
       end_timestamp: mySqldateformat
     }
-    //console.log('MEDIATATION PAYLOAD', meditation);
+    console.log('MEDIATATION PAYLOAD', meditation);
     MeditationServices.saveMeditation(meditation);
 
 
@@ -130,9 +141,10 @@ export default class Meditaion extends React.Component {
       
     }
     const {count} = this.state;
+    const username = AuthenticationService.getLoggedInUserName();
     return (
       <div className="meditation-container" style = {style}>
-        <h2 className = "meditation-message">Display Welcome Message!</h2>
+        <h2 className = "meditation-message">Welcome, {username? username : 'Guest'}</h2>
         <Clock time={count}/>
         <div>
         <Input onSetCountdown={this.handleCountdown.bind(this)}/>
