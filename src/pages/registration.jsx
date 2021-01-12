@@ -101,7 +101,9 @@ export default function SignUp() {
         setResponseData(res.data);
         console.log("res.data : " , res.data);
        }
-      )
+      ).catch(() => {
+        alert("User Registration failed!")
+      });
       resetForm()
   }
 

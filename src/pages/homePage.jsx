@@ -1,11 +1,17 @@
   
 import React from "react";
+import AuthenticationService from "../services/AuthenticationService.js";
 
 export default class HomePage extends React.Component {
     render() {
+
+        const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+        const username = AuthenticationService.getLoggedInUserName();
+
         return (
             <div>
-                <h1> Welcome to the Sunrise Meditation App </h1>
+                <h1> Sunrise Meditation App </h1>
+                {isUserLoggedIn && <h3>Welcome {username}!</h3>}
                     <p> 
                         Meditation works wonders by calming the mind, creating relaxation, promoting better sleep, and encouraging a healthy lifestyle.
                         <br></br>
