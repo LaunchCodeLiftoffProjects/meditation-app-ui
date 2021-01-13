@@ -76,10 +76,6 @@ export default class Meditaion extends React.Component {
       newCount ===0 && this.handleStop();
       
     }, 1000);
-   // console.log("state from starthandler: " , this.state);
-    
-
-  
   }
   
 
@@ -103,9 +99,7 @@ export default class Meditaion extends React.Component {
     // console.log("from stop handler: " ,this.state);
     let timeLogIntoMinutes=((this.state.time_log + 1)/60).toFixed(2);
 
-    // 
-
-
+   
     let meditation = {
       userId: this.state.userId,
       created_timestamp: this.state.created_timestamp,
@@ -118,6 +112,12 @@ export default class Meditaion extends React.Component {
 
   }
   
+  handleAnimation(){
+   
+    let animation = (this.state.running) ? "meditation-bubble-container" : "meditation-displayTime ";
+    return animation;
+  }
+ 
  
   handleReset() {
     this.setState(
@@ -145,7 +145,7 @@ export default class Meditaion extends React.Component {
     return (
       <div className="meditation-container" style = {style}>
         <h2 className = "meditation-message">Welcome, {username? username : 'Guest'}</h2>
-        <Clock time={count}/>
+        <Clock time={count} animate = {this.handleAnimation()}/>
         <div>
         <Input onSetCountdown={this.handleCountdown.bind(this)}/>
         <Button label="stop" onClickHandler={this.handleStop.bind(this)}/>
