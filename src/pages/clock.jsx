@@ -10,13 +10,14 @@ export default class Clock extends React.Component {
     hours =  hours.toString().length === 1 ? "0" +  hours :  hours;
     minutes = minutes.toString().length === 1 ? "0" + minutes : minutes;
     seconds = seconds.toString().length === 1 ? "0" + seconds : seconds;
-    return  hours + ':' +minutes + ':' + seconds;
+    return `${hours} : ${minutes} : ${seconds}`;
   }
   render () {
     const {time} = this.props;
+   
     return (
       <div className="meditation-timeContainer">
-        <h1 className = "meditation-minutes"><span className ="meditation-displayTime">{this.format(time)}</span> minutes </h1>
+          <div  className ={this.props.animate}>{this.format(time)}</div>  
       </div>
     )
   }

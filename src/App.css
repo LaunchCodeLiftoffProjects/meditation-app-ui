@@ -47,19 +47,17 @@
   margin: 0 auto;
   text-align: center;
 }
-.meditation-message {
-  padding-bottom: 1.5em;
-}
-
-.meditation-timeContainer {
-  margin: 60px 0;
-}
 
 .meditation-displayTime {
-  border: 2px solid #ccc;
-  font-size: 2em;
-  padding: 50px 30px;
+  width: 30vw;
+  height: 30vw;
+  border: 7px solid #ccc;
+  border-radius: 50%;
+  font-size: 5vw;
+  margin: 0 auto;
+  padding-top: 10vw;
 }
+
 .meditation-btn {
   width: 25%;
   padding: 20px;
@@ -85,4 +83,85 @@
   font-size: 1em;
   width: 45%;
   border: 2px solid #ccc;
+}
+
+/* meditation timer bubble*/
+
+.meditation-bubble-container {
+  width: 30vw;
+  height: 30vw;
+  border-radius: 50%;
+  font-size: 5vw;
+  margin: 0 auto;
+  padding-top: 10vw;
+  position: relative;
+  animation-name: pulse;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  box-shadow: inset 0 0 0 7px #79a6e8;
+  z-index: -1;
+}
+
+.meditation-bubble-container:after {
+  content: "breathe in";
+  position: absolute;
+  color: rgba(255, 255, 255, 0.7);
+  top: calc(50% - 10px);
+  font-size: 24px;
+  font-family: Helvetica;
+  width: 100%;
+  vertical-align: middle;
+  text-align: center;
+  animation-name: text;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.meditation-bubble-container:before {
+  content: "";
+  width: 16px;
+  height: 50%;
+  position: absolute;
+  display: block;
+  top: 0;
+  left: calc(50% - 8px);
+  z-index: 999;
+  background-image: radial-gradient(
+    circle at top center,
+    #6080c8 0%,
+    #6080c8 8px,
+    transparent 8px,
+    transparent 100%
+  );
+  animation-timing-function: linear;
+  transform-origin: center bottom;
+  animation-name: rotate;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
