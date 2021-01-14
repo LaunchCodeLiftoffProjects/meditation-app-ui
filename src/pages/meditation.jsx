@@ -19,7 +19,7 @@ export default class Meditaion extends React.Component {
       created_timestamp: null,
       end_timestamp:null,
       userId: null, 
-      total_time:null
+      
       
     }
 
