@@ -90,6 +90,7 @@ export default class Meditaion extends React.Component {
       clearInterval(this.timer);
      this.setState(
         {running:false,
+          count: 0
         }
         
       ); 
@@ -114,14 +115,15 @@ export default class Meditaion extends React.Component {
   
   handleAnimation(){
    
-    let animation = (this.state.running) ? "meditation-bubble-container" : "meditation-displayTime ";
+    let animation = (this.state.running && this.state.count !==0) ? "meditation-bubble-container" : "meditation-displayTime ";
     return animation;
   }
  
  
   handleReset() {
     this.setState(
-      {count: 0}
+      {count: 0, 
+      }
     );
   }
   
