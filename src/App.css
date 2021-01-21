@@ -38,7 +38,6 @@
 }
 
 /* Meditation Style*/
-
 * {
   box-sizing: border-box;
 }
@@ -51,6 +50,7 @@
 .meditation-displayTime {
   width: 30vw;
   height: 30vw;
+  color: #ccc;
   border: 7px solid #ccc;
   border-radius: 50%;
   font-size: 5vw;
