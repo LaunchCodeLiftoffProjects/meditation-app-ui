@@ -1,5 +1,6 @@
 import React from "react";
 import MeditationServices from "../services/MeditationServices";
+import AuthenticationService from "../services/AuthenticationService.js";
 import Button from "./button";
 import Clock from "./clock";
 import Input from "./input";
@@ -17,14 +18,14 @@ export default class Meditaion extends React.Component {
       time_log: 0,
       created_timestamp: null,
       end_timestamp:null,
-      
+      userId: null
     }
 
     
   }
 
   
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {   
     if(this.state.running !== prevState.running){
       switch(this.state.running) {
         case true:
@@ -47,6 +48,7 @@ export default class Meditaion extends React.Component {
  
   handleStart() {
     
+    const userId = AuthenticationService.getLoggedInUserId() ;
     const mySqldateformat = this.createDateStamp();
    
     const startTimeLog = this.state.count;
@@ -61,6 +63,7 @@ export default class Meditaion extends React.Component {
         endCount:this.state.count-1,
         time_log: this.state.startCount - this.state.endCount,
         created_timestamp: mySqldateformat,
+        userId: userId
         }
       );
       
@@ -97,6 +100,7 @@ export default class Meditaion extends React.Component {
     let timeLogIntoMinutes=((this.state.time_log + 1)/60).toFixed(2);
 
     let meditation = {
+      userId: this.state.userId,
       created_timestamp: this.state.created_timestamp,
       time_log:timeLogIntoMinutes,
       end_timestamp: mySqldateformat
@@ -130,9 +134,13 @@ export default class Meditaion extends React.Component {
       
     }
     const {count} = this.state;
+    const username = AuthenticationService.getLoggedInUserName();
+    const jwtToken = AuthenticationService.getJwtTokenFromSession();
+    AuthenticationService.setupAxiosInterceptors(AuthenticationService.createJWTToken(jwtToken));
+
     return (
-      <div className="meditation-container" style = {style}>
-        <h2 className = "meditation-message">Display Welcome Message!</h2>
+      <div className="meditation-container" style = {style}>        
+        <h2 className = "meditation-message">Welcome, {username? username : 'Guest'}</h2>
         <Clock time={count}/>
         <div>
         <Input onSetCountdown={this.handleCountdown.bind(this)}/>
