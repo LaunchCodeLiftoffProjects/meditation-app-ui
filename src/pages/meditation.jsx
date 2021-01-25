@@ -49,8 +49,6 @@ export default class Meditaion extends React.Component {
  
   handleStart() {
     const userId = AuthenticationService.getLoggedInUserId() ;
-    
-    const userId = AuthenticationService.getLoggedInUserId() ;
     const mySqldateformat = this.createDateStamp();
    
     const startTimeLog = this.state.count;
