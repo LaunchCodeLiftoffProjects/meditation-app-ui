@@ -44,9 +44,11 @@ export default class Meditaion extends React.Component {
     return mySqldateformat;
   }
 
-
+// logic for update total time pull the  total time according to the userid, pass the value in total time state,
+// do the calculate in the stop state. totalmie from start state + timelog in stop state. 
  
   handleStart() {
+    const userId = AuthenticationService.getLoggedInUserId() ;
     
     const userId = AuthenticationService.getLoggedInUserId() ;
     const mySqldateformat = this.createDateStamp();
@@ -73,23 +75,21 @@ export default class Meditaion extends React.Component {
       newCount ===0 && this.handleStop();
       
     }, 1000);
-   // console.log("state from starthandler: " , this.state);
-    
-
-  
   }
   
 
  
 
   handleStop() {
-    
+
+  
     const mySqldateformat = this.createDateStamp();
   
     if(this.timer) {
       clearInterval(this.timer);
      this.setState(
         {running:false,
+          count: 0
         }
         
       ); 
@@ -99,22 +99,30 @@ export default class Meditaion extends React.Component {
     // console.log("from stop handler: " ,this.state);
     let timeLogIntoMinutes=((this.state.time_log + 1)/60).toFixed(2);
 
+   
     let meditation = {
       userId: this.state.userId,
       created_timestamp: this.state.created_timestamp,
       time_log:timeLogIntoMinutes,
       end_timestamp: mySqldateformat
     }
-    //console.log('MEDIATATION PAYLOAD', meditation);
+    console.log('MEDIATATION PAYLOAD', meditation);
     MeditationServices.saveMeditation(meditation);
 
 
   }
   
+  handleAnimation(){
+   
+    let animation = (this.state.running && this.state.count !==0) ? "meditation-bubble-container" : "meditation-displayTime ";
+    return animation;
+  }
+ 
  
   handleReset() {
     this.setState(
-      {count: 0}
+      {count: 0, 
+      }
     );
   }
   
@@ -135,13 +143,14 @@ export default class Meditaion extends React.Component {
     }
     const {count} = this.state;
     const username = AuthenticationService.getLoggedInUserName();
+
     const jwtToken = AuthenticationService.getJwtTokenFromSession();
     AuthenticationService.setupAxiosInterceptors(AuthenticationService.createJWTToken(jwtToken));
 
     return (
-      <div className="meditation-container" style = {style}>        
+      <div className="meditation-container" style = {style}>
         <h2 className = "meditation-message">Welcome, {username? username : 'Guest'}</h2>
-        <Clock time={count}/>
+        <Clock time={count} animate = {this.handleAnimation()}/>
         <div>
         <Input onSetCountdown={this.handleCountdown.bind(this)}/>
         <Button label="stop" onClickHandler={this.handleStop.bind(this)}/>
