@@ -10,7 +10,8 @@ import userProfile from "./pages/userProfile.jsx";
 import Registration from "./pages/registration.jsx";
 import LoginSuccess from "./pages/LoginSuccess.jsx";
 import forgotPassword from "./pages/forgotPassword.jsx";
-export const Routes = () => {
+
+ export const  Routes = () => {
   return (
     <Router>
       <Layout>
@@ -29,3 +30,6 @@ export const Routes = () => {
     </Router>
   );
 };
+
+
+ 

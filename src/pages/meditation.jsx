@@ -18,16 +18,14 @@ export default class Meditaion extends React.Component {
       time_log: 0,
       created_timestamp: null,
       end_timestamp:null,
-      userId: null, 
-      
-      
+      userId: null
     }
 
     
   }
 
   
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {   
     if(this.state.running !== prevState.running){
       switch(this.state.running) {
         case true:
@@ -52,6 +50,7 @@ export default class Meditaion extends React.Component {
   handleStart() {
     const userId = AuthenticationService.getLoggedInUserId() ;
     
+    const userId = AuthenticationService.getLoggedInUserId() ;
     const mySqldateformat = this.createDateStamp();
    
     const startTimeLog = this.state.count;
@@ -144,6 +143,10 @@ export default class Meditaion extends React.Component {
     }
     const {count} = this.state;
     const username = AuthenticationService.getLoggedInUserName();
+
+    const jwtToken = AuthenticationService.getJwtTokenFromSession();
+    AuthenticationService.setupAxiosInterceptors(AuthenticationService.createJWTToken(jwtToken));
+
     return (
       <div className="meditation-container" style = {style}>
         <h2 className = "meditation-message">Welcome, {username? username : 'Guest'}</h2>
