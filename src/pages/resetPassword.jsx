@@ -25,7 +25,9 @@ const useStyles = makeStyles((theme) => ({
 
 const initialFValues = {
   
-  emailId: ""
+  password: "", 
+  confirmPassword: "", 
+  
 }
 
 export default function SignUp() {
@@ -35,12 +37,19 @@ export default function SignUp() {
   const validate = (fieldValues = values) => {
     let temp = { ...errors }
 
-   
-    if ('emailId' in fieldValues) {
-      if(temp.emailId = (/$^|.+@.+..+/).test(fieldValues.emailId)) {
-        temp.emailId = "";
+    
+    if ('password' in fieldValues) {
+      if(temp.password = fieldValues.password) {
+        temp.password = "";
       } else {
-        temp.emailId = "Email is not valid.";
+        temp.password = "This field is required.";
+      }
+    }
+    if ('confirmPassword' in fieldValues) {
+      if(temp.confirmPassword = fieldValues.confirmPassword) {
+        temp.confirmPassword = "";
+      } else {
+        temp.confirmPassword = "This field is required.";
       }
     }
     
@@ -67,13 +76,13 @@ export default function SignUp() {
 
     console.log("user : ", user);
     
-      axios.post("http://localhost:8080/forgotPassword")
+      axios.post("http://localhost:8080/resetPassword")
       .then(res => {
         setResponseData(res.data);
         console.log("res.data : " , res.data);
        }
       ).catch(() => {
-        alert("Failed to send email :(")
+        alert("Failed to reset your password :(")
       });
       resetForm()
   }
@@ -87,30 +96,34 @@ export default function SignUp() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Forgot Password?
+          Create Your New Password
         </Typography>
         <Form onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12}>
               
               <Controls.Input
-                name="emailId"              
-                label="Your email address"              
-                onChange={handleInputChange}
-                value={values.emailId}
-                error={errors.emailId}
+                name="password"              
+                label="Password"              
+                onChange={handleInputChange}        
+                value={values.password}
+                error={errors.password}
               />
+              <Controls.Input
+                name="confirmPassword"              
+                label="Please confirm your password"              
+                onChange={handleInputChange}        
+                value={values.confirmPassword}
+                error={errors.confirmPassword}
+              />
+              
               <Controls.Button
                 type="submit"
-                text="Email a password reset link?" />
-              
-              <div class="wrapper">
-                <a href="/login" variant="body2"> Are you trying to login?</a>
-              </div>
-              <div class="wrapper">
-                <a href="/register" variant="body2"> Don't have an account? Sign Up</a>
-              </div>
-              
+                text="Update password" />
+              <Controls.Button
+                text="Reset"
+                color="default"
+                onClick={resetForm} />
             </Grid>
           </Grid>
         </Form>

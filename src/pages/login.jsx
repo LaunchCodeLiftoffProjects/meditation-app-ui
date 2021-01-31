@@ -81,6 +81,12 @@ class login extends Component {
             <button class="btn btn-lg btn-primary btn-block" type="submit">
               Login
             </button>
+            <div class="wrapper">
+            <a href="/forgotPassword" variant="body2"> Did you forget your password?</a>
+            </div>
+            <div class="wrapper">
+            <a href="/register" variant="body2"> Don't have an account? Sign Up</a>
+            </div>
           </form>
         </div>
       </div>
