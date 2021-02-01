@@ -49,10 +49,6 @@ class AuthenticationService {
         return true
     }
 
-    getLoggedInUserId() {
-        let userId = sessionStorage.getItem(USER_ID_SESSION_ATTRIBUTE_NAME)        
-        return userId
-    }
     
 
     getLoggedInUserName() {
