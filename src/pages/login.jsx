@@ -55,13 +55,21 @@ class login extends Component {
   }
 
   render() {
+    const style = {
+      marginBottom: "20px",
+      width: "22vw",
+      height: "4vw",
+      border: "1px solid #ccc",
+      borderRadius: "5px",
+
+    }
     return (
       <div>
         <div class="wrapper">
           <form class="form-signin" onSubmit={this.handleFormSubmit}>
             <h2 class="form-signin-heading">User Login</h2>
             <div className="form-group">
-              <input type="text"
+              <input style = {style} type="text"
                 class="form-control"
                 placeholder="User name"
                 name="username"
@@ -70,15 +78,16 @@ class login extends Component {
               />
             </div>
             <div className="form-group">
-              <input type="password"
+              <input style = {style}   type="password"
                 class="form-control"
-                placeholder="password"
+                placeholder="Password"
                 name="password"
                 value={this.state.password.text}
                 onChange={this.handleChange}
               />
             </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">
+            <button style = {{width: "8vw", height: "3vw", border: "1px solid #ccc",
+      borderRadius: "3px"}}  class="btn btn-lg btn-primary btn-block" type="submit">
               Login
             </button>
             <div class="wrapper">
