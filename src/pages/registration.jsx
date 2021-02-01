@@ -10,6 +10,7 @@ import axios from "axios";
 import { useForm, Form } from '../components/useForm';
 import Controls from "../components/controls/Control";
 
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -158,7 +159,7 @@ export default function SignUp() {
               />
               <Controls.Button
                 type="submit"
-                text="Sign Up" />
+                text="Sign Up"  />
               <Controls.Button
                 text="Reset"
                 color="default"
