@@ -165,3 +165,8 @@
     transform: scale(1);
   }
 }
+
+.learnContainer {
+  margin: 0 15%;
+  text-align: left;
+}
