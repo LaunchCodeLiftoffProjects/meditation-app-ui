@@ -1,3 +1,10 @@
+#Meditaion Group Project
+![sunrise](https://user-images.githubusercontent.com/33336597/115132497-880fa600-9fc6-11eb-92dd-223cac738496.gif)
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
